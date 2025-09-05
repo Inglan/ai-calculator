@@ -44,7 +44,7 @@ export default function Home() {
     <div className="flex h-screen flex-col items-center justify-center gap-4 p-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl">AI Calculator</h1>
-        <div className="mb-2 w-fit rounded p-2 flex justify-end items-center text-right text-2xl border min-h-14 min-w-full">
+        <div className="mb-2 w-fit rounded-lg p-2 flex justify-end items-center text-right text-2xl border min-h-14 min-w-full">
           {display}
         </div>
         <div className="flex gap-2">
