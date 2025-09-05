@@ -15,6 +15,7 @@ export default function Home() {
   const clear = () => {
     setDisplay("");
   };
+  const calculate = () => {};
 
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-4 p-4">
@@ -128,7 +129,7 @@ export default function Home() {
           >
             .
           </Button>
-          <Button variant="secondary" className="flex-grow">
+          <Button variant="secondary" className="flex-grow" onClick={calculate}>
             =
           </Button>
           <Button
