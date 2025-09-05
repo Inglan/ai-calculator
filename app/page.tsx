@@ -15,7 +15,27 @@ export default function Home() {
   const clear = () => {
     setDisplay("");
   };
-  const calculate = () => {};
+  const calculate = async () => {
+    const request = await fetch("https://ai.hackclub.com/chat/completions", {
+      method: "POST",
+      body: JSON.stringify({
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are a calculator. The user will input an equation, and you will respond with the answer, without any explanation or code blocks.",
+          },
+          {
+            role: "user",
+            content: display,
+          },
+        ],
+        model: "meta-llama/llama-4-maverick-17b-128e-instruct",
+      }),
+    });
+    const response = await request.json();
+    setDisplay(response.choices[0].message.content);
+  };
 
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-4 p-4">
