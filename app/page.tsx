@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [display, setDisplay] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleNumber = (number: string) => {
     setDisplay(display + number);
@@ -16,6 +17,7 @@ export default function Home() {
     setDisplay("");
   };
   const calculate = async () => {
+    setLoading(true);
     const request = await fetch("https://ai.hackclub.com/chat/completions", {
       method: "POST",
       body: JSON.stringify({
@@ -35,6 +37,7 @@ export default function Home() {
     });
     const response = await request.json();
     setDisplay(response.choices[0].message.content);
+    setLoading(false);
   };
 
   return (
@@ -46,6 +49,7 @@ export default function Home() {
         </div>
         <div className="flex gap-2">
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("7")}
@@ -53,6 +57,7 @@ export default function Home() {
             7
           </Button>
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("8")}
@@ -60,6 +65,7 @@ export default function Home() {
             8
           </Button>
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("9")}
@@ -67,6 +73,7 @@ export default function Home() {
             9
           </Button>
           <Button
+            disabled={loading}
             variant="secondary"
             className="flex-grow"
             onClick={() => handleOperator("/")}
@@ -76,6 +83,7 @@ export default function Home() {
         </div>
         <div className="flex gap-2">
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("4")}
@@ -83,6 +91,7 @@ export default function Home() {
             4
           </Button>
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("5")}
@@ -90,6 +99,7 @@ export default function Home() {
             5
           </Button>
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("6")}
@@ -97,6 +107,7 @@ export default function Home() {
             6
           </Button>
           <Button
+            disabled={loading}
             variant="secondary"
             className="flex-grow"
             onClick={() => handleOperator("*")}
@@ -106,6 +117,7 @@ export default function Home() {
         </div>
         <div className="flex gap-2">
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("1")}
@@ -113,6 +125,7 @@ export default function Home() {
             1
           </Button>
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("2")}
@@ -120,6 +133,7 @@ export default function Home() {
             2
           </Button>
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("3")}
@@ -127,6 +141,7 @@ export default function Home() {
             3
           </Button>
           <Button
+            disabled={loading}
             variant="secondary"
             className="flex-grow"
             onClick={() => handleOperator("-")}
@@ -136,6 +151,7 @@ export default function Home() {
         </div>
         <div className="flex gap-2">
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber("0")}
@@ -143,16 +159,23 @@ export default function Home() {
             0
           </Button>
           <Button
+            disabled={loading}
             variant="outline"
             className="flex-grow"
             onClick={() => handleNumber(".")}
           >
             .
           </Button>
-          <Button variant="secondary" className="flex-grow" onClick={calculate}>
+          <Button
+            disabled={loading}
+            variant="secondary"
+            className="flex-grow"
+            onClick={calculate}
+          >
             =
           </Button>
           <Button
+            disabled={loading}
             variant="secondary"
             className="flex-grow"
             onClick={() => handleOperator("+")}
@@ -160,7 +183,7 @@ export default function Home() {
             +
           </Button>
         </div>
-        <Button variant="destructive" onClick={clear}>
+        <Button disabled={loading} variant="destructive" onClick={clear}>
           Clear
         </Button>
       </div>
